@@ -10,10 +10,26 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewCellDelegate {
 
+    @IBOutlet var newItemField: UITextField!
     @IBOutlet var tableView: UITableView!
 
     var groceryListItems: [GroceryListItem] = []
 
+    @IBAction func addPressed(_ sender: UIButton) {
+        if let text = newItemField.text {
+
+            // self.groceryListItems.append(GroceryListItem(text: text))
+            self.newItemField.text = ""
+            let index = self.groceryListItems.count
+            self.groceryListItems.insert(GroceryListItem(text: text), at: index)
+            let indexPathForRow = IndexPath(row: index, section: 0)
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [indexPathForRow], with: .automatic)
+            self.tableView.endUpdates()
+        }
+
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

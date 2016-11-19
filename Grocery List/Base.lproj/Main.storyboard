@@ -31,6 +31,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68A-kC-Jcq">
                                                 <frame key="frameInset" minX="345" width="30" height="40"/>
                                                 <state key="normal" title="Add"/>
+                                                <connections>
+                                                    <action selector="addPressed:" destination="cV9-lH-Vkc" eventType="touchUpInside" id="BLw-xf-lgg"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -67,6 +70,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="6Nm-uK-O1q"/>
                     <connections>
+                        <outlet property="newItemField" destination="MKY-eD-3o2" id="Zb2-yj-Xla"/>
                         <outlet property="tableView" destination="ZrG-Tu-2XF" id="qpG-QD-gLq"/>
                     </connections>
                 </viewController>
