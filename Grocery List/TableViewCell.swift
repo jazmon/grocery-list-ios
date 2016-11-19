@@ -21,10 +21,9 @@ class TableViewCell: UITableViewCell {
     var delegate: TableViewCellDelegate?
     var groceryListItem: GroceryListItem?
 
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        print("awake")
 
         let recognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan(recognizer:)))
         recognizer.delegate = self

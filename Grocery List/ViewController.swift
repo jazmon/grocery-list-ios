@@ -8,14 +8,17 @@
 
 import UIKit
 
-class ViewController: UITableViewController, TableViewCellDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewCellDelegate {
+
+    @IBOutlet var tableView: UITableView!
 
     var groceryListItems: [GroceryListItem] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.backgroundColor = UIColor.black
+
+        // tableView.backgroundColor = UIColor.black
 
         if groceryListItems.count > 0 {
             return
@@ -27,7 +30,7 @@ class ViewController: UITableViewController, TableViewCellDelegate {
 
     // MARK: - Tableview datasource
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
 
@@ -43,11 +46,11 @@ class ViewController: UITableViewController, TableViewCellDelegate {
         return cell*/
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groceryListItems.count
     }
 
