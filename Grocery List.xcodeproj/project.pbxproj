@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C1C24661DE06F8300C61305 /* GroceryListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C24651DE06F8300C61305 /* GroceryListItem.swift */; };
+		2C46B50D1DE0842200EF8EBC /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C46B50C1DE0842200EF8EBC /* TableViewCell.swift */; };
 		2C5D80C91DDD099D00715786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D80C81DDD099D00715786 /* AppDelegate.swift */; };
 		2C5D80CB1DDD099D00715786 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D80CA1DDD099D00715786 /* ViewController.swift */; };
 		2C5D80CE1DDD099D00715786 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D80CC1DDD099D00715786 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		2C1C24651DE06F8300C61305 /* GroceryListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListItem.swift; sourceTree = "<group>"; };
+		2C46B50C1DE0842200EF8EBC /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		2C5D80C51DDD099D00715786 /* Grocery List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grocery List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D80C81DDD099D00715786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C5D80CA1DDD099D00715786 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				2C5D80CF1DDD099D00715786 /* Assets.xcassets */,
 				2C5D80D11DDD099D00715786 /* LaunchScreen.storyboard */,
 				2C5D80D41DDD099D00715786 /* Info.plist */,
+				2C46B50C1DE0842200EF8EBC /* TableViewCell.swift */,
 			);
 			path = "Grocery List";
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C5D80CB1DDD099D00715786 /* ViewController.swift in Sources */,
+				2C46B50D1DE0842200EF8EBC /* TableViewCell.swift in Sources */,
 				2C5D80C91DDD099D00715786 /* AppDelegate.swift in Sources */,
 				2C1C24661DE06F8300C61305 /* GroceryListItem.swift in Sources */,
 			);

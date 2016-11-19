@@ -15,6 +15,8 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.backgroundColor = UIColor.black
+
         if groceryListItems.count > 0 {
             return
         }
@@ -32,6 +34,7 @@ class ViewController: UITableViewController {
         // let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
         let item = groceryListItems[indexPath.row]
         cell.textLabel?.text = item.text
+        cell.selectionStyle = .none
         return cell
         /*let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "foo")
         return cell*/
