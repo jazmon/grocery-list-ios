@@ -8,10 +8,18 @@
 
 import UIKit
 
+// A protocol that the TableViewCell uses to inform its delegate of state change
+protocol TableViewCellDelegate {
+    // indicates that the given item has been deleted
+    func groceryListItemDeleted(groceryListItem: GroceryListItem)
+}
+
 class TableViewCell: UITableViewCell {
 
     var originalCenter: CGPoint = CGPoint()
     var deleteOnDragRelease: Bool = false
+    var delegate: TableViewCellDelegate?
+    var groceryListItem: GroceryListItem?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -61,6 +69,8 @@ class TableViewCell: UITableViewCell {
             if !deleteOnDragRelease {
                 // if the item is not being deleted, snap back to the original location
                 UIView.animate(withDuration: 0.2, animations: {self.frame = originalFrame})
+            } else if delegate != nil && groceryListItem != nil {
+                delegate!.groceryListItemDeleted(groceryListItem: groceryListItem!)
             }
             break
         default:

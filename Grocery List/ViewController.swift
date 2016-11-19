@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class ViewController: UITableViewController, TableViewCellDelegate {
 
     var groceryListItems: [GroceryListItem] = []
 
@@ -29,12 +29,15 @@ class ViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
 
         // let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
         let item = groceryListItems[indexPath.row]
         cell.textLabel?.text = item.text
         cell.selectionStyle = .none
+        // cell.delegat = self
+        cell.delegate = self
+        cell.groceryListItem = item
         return cell
         /*let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "foo")
         return cell*/
@@ -46,5 +49,21 @@ class ViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groceryListItems.count
+    }
+
+    // MARK: - TableViewCellDelegate methosd
+
+    func groceryListItemDeleted(groceryListItem: GroceryListItem) {
+        print("groverylistitemdeleted")
+
+        if let index = groceryListItems.index(where: {$0.text == groceryListItem.text}) {
+            groceryListItems.remove(at: index)
+
+            self.tableView.beginUpdates()
+            let indexPathForRow = IndexPath(row: index, section: 0)
+            self.tableView.deleteRows(at: [indexPathForRow], with: UITableViewRowAnimation.fade)
+            tableView.endUpdates()
+        }
+
     }
 }
