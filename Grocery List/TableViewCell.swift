@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Foundation
 // A protocol that the TableViewCell uses to inform its delegate of state change
 protocol TableViewCellDelegate {
     // indicates that the given item has been deleted
@@ -59,7 +59,8 @@ class TableViewCell: UITableViewCell {
             let translation = recognizer.translation(in: self)
             center = CGPoint(x: originalCenter.x + translation.x, y: originalCenter.y)
             // has the user dragged the item far enough to initiate a delete/complete?
-            deleteOnDragRelease = frame.origin.x < -frame.size.width / 2.0
+
+            deleteOnDragRelease = frame.origin.x < -frame.size.width / 2.0 || frame.origin.x > frame.size.width / 2.0
             break
         case .ended:
             // the frame this cell had before user dragged it
