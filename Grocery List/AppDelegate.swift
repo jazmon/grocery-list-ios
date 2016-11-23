@@ -42,5 +42,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+    // MARK: - state saving
+    func application(_ application: UIApplication, shouldRestoreApplicationState coder: NSCoder) -> Bool {
+        print("shouldRestoreApplicationState")
+        return true
+    }
+
+    func application(_ application: UIApplication, shouldSaveApplicationState coder: NSCoder) -> Bool {
+        print("shouldSaveApplicationState")
+        return true
+    }
+
+//    class func archiveData(for model: MeetingCostModel) {
+//        print("archiving")
+//        let defaultProps = UserDefaults.standard
+//        let data = NSKeyedArchiver.archivedData(withRootObject: model)
+//        defaultProps.set(data, forKey: "meetingCostModel")
+//        defaultProps.synchronize()
+//    }
+//
+//    class func restoreData() -> MeetingCostModel {
+//        print("restoring")
+//        let defaultProps = UserDefaults.standard
+//        let data: NSData = defaultProps.object(forKey: "meetingCostModel") as! NSData
+//
+//        let model: MeetingCostModel = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! MeetingCostModel
+//
+//        return model
+//    }
 }
 

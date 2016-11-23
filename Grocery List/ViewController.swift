@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewCellDelegate {
 
+    let prefKey = "groceryListItems"
     @IBOutlet var newItemField: UITextField!
     @IBOutlet var tableView: UITableView!
 
@@ -70,7 +71,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return groceryListItems.count
     }
 
-    // MARK: - TableViewCellDelegate methosd
+    // MARK: TableViewCellDelegate methosd
 
     func groceryListItemDeleted(groceryListItem: GroceryListItem) {
         print("groverylistitemdeleted")
@@ -84,5 +85,46 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             tableView.endUpdates()
         }
 
+    }
+
+    // MARK: state (re)storing
+
+    override func encodeRestorableState(with coder: NSCoder) {
+        print("viewCtrl, encode state")
+        coder.encode(newItemField.text, forKey: "newItem")
+        saveModel()
+        super.encodeRestorableState(with: coder)
+    }
+
+    override func decodeRestorableState(with coder: NSCoder) {
+        print("viewCtrl, decode state")
+        newItemField.text = coder.decodeObject(forKey: "newItem") as? String
+        self.groceryListItems = loadModel() ?? []
+        super.decodeRestorableState(with: coder)
+    }
+
+    func saveModel() {
+        print("archiving")
+        let defaultProps = UserDefaults.standard
+        let data = NSKeyedArchiver.archivedData(withRootObject: groceryListItems)
+        defaultProps.set(data, forKey: prefKey)
+        defaultProps.synchronize()
+    }
+
+    func loadModel() -> [GroceryListItem]? {
+        print("restoring")
+        let defaultProps = UserDefaults.standard
+
+//        if let data: AnyObject? = defaultProps.object(forKey: prefKey) {
+//            let model = [GroceryListItem] =
+//        }
+//        let data: NSData = defaultProps.object(forKey: prefKey) as! NSData
+        if let data: NSData = defaultProps.object(forKey: prefKey) as? NSData {
+
+            let model: [GroceryListItem] = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [GroceryListItem]
+
+            return model
+        }
+        return nil
     }
 }

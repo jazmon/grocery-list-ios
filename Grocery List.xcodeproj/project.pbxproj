@@ -112,11 +112,10 @@
 				2C1C24671DE06FEB00C61305 /* models */,
 				2C5D80C81DDD099D00715786 /* AppDelegate.swift */,
 				2C5D80CA1DDD099D00715786 /* ViewController.swift */,
-				2C5D80CC1DDD099D00715786 /* Main.storyboard */,
+				2CE70FF01DE1BD9D000DBAFB /* storyboards */,
 				2C5D80CF1DDD099D00715786 /* Assets.xcassets */,
-				2C5D80D11DDD099D00715786 /* LaunchScreen.storyboard */,
 				2C5D80D41DDD099D00715786 /* Info.plist */,
-				2C46B50C1DE0842200EF8EBC /* TableViewCell.swift */,
+				2CE70FEF1DE1BD8C000DBAFB /* cells */,
 			);
 			path = "Grocery List";
 			sourceTree = "<group>";
@@ -137,6 +136,23 @@
 				2C5D80EA1DDD099E00715786 /* Info.plist */,
 			);
 			path = "Grocery ListUITests";
+			sourceTree = "<group>";
+		};
+		2CE70FEF1DE1BD8C000DBAFB /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				2C46B50C1DE0842200EF8EBC /* TableViewCell.swift */,
+			);
+			name = cells;
+			sourceTree = "<group>";
+		};
+		2CE70FF01DE1BD9D000DBAFB /* storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2C5D80CC1DDD099D00715786 /* Main.storyboard */,
+				2C5D80D11DDD099D00715786 /* LaunchScreen.storyboard */,
+			);
+			name = storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
