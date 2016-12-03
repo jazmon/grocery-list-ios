@@ -16,6 +16,7 @@
 		2C5D80D31DDD099D00715786 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C5D80D11DDD099D00715786 /* LaunchScreen.storyboard */; };
 		2C5D80DE1DDD099E00715786 /* Grocery_ListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D80DD1DDD099E00715786 /* Grocery_ListTests.swift */; };
 		2C5D80E91DDD099E00715786 /* Grocery_ListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D80E81DDD099E00715786 /* Grocery_ListUITests.swift */; };
+		2C6CDB171DEA44A600049A40 /* GroceryItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6CDB161DEA44A600049A40 /* GroceryItems.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		2C5D80E41DDD099E00715786 /* Grocery ListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Grocery ListUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D80E81DDD099E00715786 /* Grocery_ListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grocery_ListUITests.swift; sourceTree = "<group>"; };
 		2C5D80EA1DDD099E00715786 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C6CDB161DEA44A600049A40 /* GroceryItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryItems.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				2C1C24651DE06F8300C61305 /* GroceryListItem.swift */,
+				2C6CDB161DEA44A600049A40 /* GroceryItems.swift */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			files = (
 				2C5D80CB1DDD099D00715786 /* ViewController.swift in Sources */,
 				2C46B50D1DE0842200EF8EBC /* TableViewCell.swift in Sources */,
+				2C6CDB171DEA44A600049A40 /* GroceryItems.swift in Sources */,
 				2C5D80C91DDD099D00715786 /* AppDelegate.swift in Sources */,
 				2C1C24661DE06F8300C61305 /* GroceryListItem.swift in Sources */,
 			);

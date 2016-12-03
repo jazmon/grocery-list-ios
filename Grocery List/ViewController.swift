@@ -14,7 +14,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var newItemField: UITextField!
     @IBOutlet var tableView: UITableView!
 
-    var groceryListItems: [GroceryListItem] = []
+    //var groceryListItems: [GroceryListItem] = []
+    var groceryItems: GroceryItems
 
     @IBAction func addPressed(_ sender: UIButton) {
         if let text = newItemField.text {
@@ -37,12 +38,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         // tableView.backgroundColor = UIColor.black
 
-        if groceryListItems.count > 0 {
+        if groceryItems.count > 0 {
             return
         }
 
-        groceryListItems.append(GroceryListItem(text: "bacon"))
-        groceryListItems.append(GroceryListItem(text: "eggs"))
+        groceryItems.add(item: GroceryListItem(text: "bacon"), to: "undefined")
+        groceryItems.add(item: GroceryListItem(text: "eggs"), to: "undefined")
     }
 
     // MARK: - Tableview datasource
@@ -64,7 +65,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return groceryItems.listCount
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,19 +100,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func decodeRestorableState(with coder: NSCoder) {
         print("viewCtrl, decode state")
         newItemField.text = coder.decodeObject(forKey: "newItem") as? String
-        self.groceryListItems = loadModel() ?? []
+        self.groceryItems = loadModel() ?? GroceryItems()
         super.decodeRestorableState(with: coder)
     }
 
     func saveModel() {
         print("archiving")
         let defaultProps = UserDefaults.standard
-        let data = NSKeyedArchiver.archivedData(withRootObject: groceryListItems)
+        let data = NSKeyedArchiver.archivedData(withRootObject: groceryItems)
         defaultProps.set(data, forKey: prefKey)
         defaultProps.synchronize()
     }
 
-    func loadModel() -> [GroceryListItem]? {
+    func loadModel() -> GroceryItems? {
         print("restoring")
         let defaultProps = UserDefaults.standard
 
@@ -121,7 +122,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        let data: NSData = defaultProps.object(forKey: prefKey) as! NSData
         if let data: NSData = defaultProps.object(forKey: prefKey) as? NSData {
 
-            let model: [GroceryListItem] = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! [GroceryListItem]
+            let model: GroceryItems = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! GroceryItems
 
             return model
         }
