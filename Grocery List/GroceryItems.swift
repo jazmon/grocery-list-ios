@@ -9,44 +9,80 @@
 import UIKit
 
 class GroceryItems: NSObject {
-    var items: [String: [GroceryListItem]]
+    var categoryNames: [String]
+    var itemsPerCategory: [[GroceryListItem]]
+    // var items: [String: [GroceryListItem]]
 
     override init() {
-        self.items = [:]
+        //self.items = [:]
+        self.categoryNames = [];
+        self.categoryNames.append("Uncategorized")
+        self.categoryNames.append("produce")
 
-        var foo = [[String]]()
-        foo.append(["lol"])
+        self.itemsPerCategory = [
+            [GroceryListItem(text: "bacon")],
+            [GroceryListItem(text: "lettuce"), GroceryListItem(text: "spinach")]
+        ]
     }
 
-    func add(item: GroceryListItem, to: String) -> Void {
-        if (items[to] == nil) {
-            items[to] = []
-        }
-        items[to]!.append(item)
+    func add(item: GroceryListItem, to: Int) -> Void {
+        // category must exists before adding an item to it
+        itemsPerCategory[to].append(item)
     }
 
-    func remove(itemIndex: Int, from: String) -> GroceryListItem? {
-        if (items[from] == nil) {
-            return nil
+    func remove(itemIndex: Int, from: Int) -> GroceryListItem? {
+//        if let item = itemsPerCategory[from][itemIndex] {
+//            return item
+//        }
+//        return nil
+        return itemsPerCategory[from][itemIndex]
+//        if ()
+//        if (items[from] == nil) {
+//            return nil
+//        }
+//        return items[from]!.remove(at: itemIndex)
+    }
+
+    func getItem(list: Int, index: Int) -> GroceryListItem {
+        return self.itemsPerCategory[list][index]
+    }
+
+    func countFor(index: Int) -> Int {
+        return self.itemsPerCategory[index].count
+    }
+
+    func remove(item: GroceryListItem) -> (section: Int, index: Int)? {
+        for (index, list) in itemsPerCategory.enumerated() {
+            if let i: Int = list.index(where: {$0.text == item.text}) {
+                itemsPerCategory[index].remove(at: i)
+                return (section: index, index: i)
+
+            }
         }
-        return items[from]!.remove(at: itemIndex)
+        return nil
+//        if let index = itemsPerCategory.index(where: {$0.text == item.text}) {
+//            groceryListItems.remove(at: index)
+//
+//            self.tableView.beginUpdates()
+//            let indexPathForRow = IndexPath(row: index, section: 0)
+//            self.tableView.deleteRows(at: [indexPathForRow], with: UITableViewRowAnimation.fade)
+//            tableView.endUpdates()
+//        }
     }
 
     var listCount: Int {
         get {
-            return self.items.keys.count
+            return self.itemsPerCategory.count
         }
     }
 
     var count: Int {
         get {
             var itemCount = 0
-
-            for category in items.keys {
-                if let itemsArray = items[category] {
-                    itemCount += itemsArray.count
-                }
+            for i in self.itemsPerCategory {
+                itemCount += i.count
             }
+
             return itemCount
         }
     }
