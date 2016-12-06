@@ -26,7 +26,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let section = 0
             let index = self.groceryItems.countFor(index: section)
             // Add to data source
-            self.groceryItems.add(item: GroceryListItem(text: text), to: index)
+            self.groceryItems.add(item: GroceryListItem(text: text), to: section)
 
             // insert into table
             let indexPathForRow = IndexPath(row: index, section: section)
