@@ -35,7 +35,8 @@ class GroceryItems: NSObject {
 //            return item
 //        }
 //        return nil
-        return itemsPerCategory[from][itemIndex]
+        // return itemsPerCategory[from][itemIndex]
+        return itemsPerCategory[from].remove(at: itemIndex)
 //        if ()
 //        if (items[from] == nil) {
 //            return nil

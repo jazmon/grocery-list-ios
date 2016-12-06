@@ -92,11 +92,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         if let position = groceryItems.remove(item: groceryListItem) {
             print("pos")
-            self.tableView.beginUpdates()
+
             let indexPathForRow = IndexPath(row: position.index, section: position.section)
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: [indexPathForRow], with: UITableViewRowAnimation.fade)
-            tableView.endUpdates()
+            self.tableView.endUpdates()
         }
 
 //        if let index = groceryItems.index(where: {$0.text == groceryListItem.text}) {
