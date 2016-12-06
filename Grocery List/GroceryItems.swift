@@ -11,10 +11,8 @@ import UIKit
 class GroceryItems: NSObject {
     var categoryNames: [String]
     var itemsPerCategory: [[GroceryListItem]]
-    // var items: [String: [GroceryListItem]]
 
     override init() {
-        //self.items = [:]
         self.categoryNames = [];
         self.categoryNames.append("Uncategorized")
         self.categoryNames.append("produce")
@@ -35,17 +33,7 @@ class GroceryItems: NSObject {
     }
 
     func remove(itemIndex: Int, from: Int) -> GroceryListItem? {
-//        if let item = itemsPerCategory[from][itemIndex] {
-//            return item
-//        }
-//        return nil
-        // return itemsPerCategory[from][itemIndex]
         return itemsPerCategory[from].remove(at: itemIndex)
-//        if ()
-//        if (items[from] == nil) {
-//            return nil
-//        }
-//        return items[from]!.remove(at: itemIndex)
     }
 
     func getItem(list: Int, index: Int) -> GroceryListItem {
@@ -61,18 +49,9 @@ class GroceryItems: NSObject {
             if let i: Int = list.index(where: {$0.text == item.text}) {
                 itemsPerCategory[index].remove(at: i)
                 return (section: index, index: i)
-
             }
         }
         return nil
-//        if let index = itemsPerCategory.index(where: {$0.text == item.text}) {
-//            groceryListItems.remove(at: index)
-//
-//            self.tableView.beginUpdates()
-//            let indexPathForRow = IndexPath(row: index, section: 0)
-//            self.tableView.deleteRows(at: [indexPathForRow], with: UITableViewRowAnimation.fade)
-//            tableView.endUpdates()
-//        }
     }
 
     var listCount: Int {

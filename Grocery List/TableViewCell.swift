@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+
 // A protocol that the TableViewCell uses to inform its delegate of state change
 protocol TableViewCellDelegate {
     // indicates that the given item has been deleted
@@ -32,7 +33,6 @@ class TableViewCell: UITableViewCell {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,8 +42,6 @@ class TableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        print("setselected")
-
         // Configure the view for the selected state
     }
 

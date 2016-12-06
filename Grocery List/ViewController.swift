@@ -14,7 +14,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var newItemField: UITextField!
     @IBOutlet var tableView: UITableView!
 
-    //var groceryListItems: [GroceryListItem] = []
     var groceryItems: GroceryItems!
 
     @IBAction func addPressed(_ sender: UIButton) {
@@ -38,9 +37,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
-        // tableView.backgroundColor = UIColor.black
-
 //        if groceryItems.count > 0 {
 //            return
 //        }
@@ -54,23 +50,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     // MARK: - Tableview datasource
 
-
-
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-
-        // let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
 
         let item = groceryItems.getItem(list: indexPath.section, index: indexPath.row)
         cell.textLabel?.text = item.text
         cell.selectionStyle = .none
-        // cell.delegat = self
         cell.delegate = self
         cell.groceryListItem = item
+
         return cell
-        /*let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "foo")
-        return cell*/
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -95,35 +84,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        // let movedObject = self.groceryItems.getItem(list: sourceIndexPath.section, index: sourceIndexPath.row)
         let object = self.groceryItems.remove(itemIndex: sourceIndexPath.row, from: sourceIndexPath.section)
         self.groceryItems.insert(item: object!, list: destinationIndexPath.section, to: destinationIndexPath.row)
-        // self.tableView.reloadData() // for debug
     }
 
     // MARK: TableViewCellDelegate methosd
 
     func groceryListItemDeleted(groceryListItem: GroceryListItem) {
-        print("groverylistitemdeleted")
-
         if let position = groceryItems.remove(item: groceryListItem) {
-            print("pos")
-
             let indexPathForRow = IndexPath(row: position.index, section: position.section)
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: [indexPathForRow], with: UITableViewRowAnimation.fade)
             self.tableView.endUpdates()
         }
-
-//        if let index = groceryItems.index(where: {$0.text == groceryListItem.text}) {
-//            groceryListItems.remove(at: index)
-//
-//            self.tableView.beginUpdates()
-//            let indexPathForRow = IndexPath(row: index, section: 0)
-//            self.tableView.deleteRows(at: [indexPathForRow], with: UITableViewRowAnimation.fade)
-//            tableView.endUpdates()
-//        }
-
     }
 
     // MARK: state (re)storing
