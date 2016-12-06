@@ -46,6 +46,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        }
 
         self.groceryItems = GroceryItems()
+        self.tableView.isEditing = true
 
         // groceryItems.add(item: GroceryListItem(text: "bacon"), to: "undefined")
         // groceryItems.add(item: GroceryListItem(text: "eggs"), to: "undefined")
@@ -83,6 +84,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groceryItems.countFor(index: section)
+    }
+
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
+    }
+
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        // let movedObject = self.groceryItems.getItem(list: sourceIndexPath.section, index: sourceIndexPath.row)
+        let object = self.groceryItems.remove(itemIndex: sourceIndexPath.row, from: sourceIndexPath.section)
+        self.groceryItems.insert(item: object!, list: destinationIndexPath.section, to: destinationIndexPath.row)
+        // self.tableView.reloadData() // for debug
     }
 
     // MARK: TableViewCellDelegate methosd

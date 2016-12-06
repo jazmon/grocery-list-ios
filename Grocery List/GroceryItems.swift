@@ -30,6 +30,10 @@ class GroceryItems: NSObject {
         itemsPerCategory[to].append(item)
     }
 
+    func insert(item: GroceryListItem, list: Int, to: Int) {
+        itemsPerCategory[list].insert(item, at: to)
+    }
+
     func remove(itemIndex: Int, from: Int) -> GroceryListItem? {
 //        if let item = itemsPerCategory[from][itemIndex] {
 //            return item
