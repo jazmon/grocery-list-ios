@@ -16,10 +16,18 @@ class GroceryItems: NSObject, NSCoding {
         self.categoryNames = [];
         self.categoryNames.append("Uncategorized")
         self.categoryNames.append("produce")
+        self.categoryNames.append("household items")
+        self.categoryNames.append("dairy")
+        self.categoryNames.append("baking & seasoning")
+        self.categoryNames.append("bread & bakery")
+
 
         self.itemsPerCategory = [
             [GroceryListItem(text: "bacon")],
-            [GroceryListItem(text: "lettuce"), GroceryListItem(text: "spinach")]
+            [GroceryListItem(text: "lettuce"), GroceryListItem(text: "spinach")],
+            [],
+            [],
+            []
         ]
     }
 
