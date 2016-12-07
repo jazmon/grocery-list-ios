@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GroceryItems: NSObject {
+class GroceryItems: NSObject, NSCoding {
     var categoryNames: [String]
     var itemsPerCategory: [[GroceryListItem]]
 
@@ -21,6 +21,19 @@ class GroceryItems: NSObject {
             [GroceryListItem(text: "bacon")],
             [GroceryListItem(text: "lettuce"), GroceryListItem(text: "spinach")]
         ]
+    }
+
+//    required init?(coder aDecoder: NSCoder) {
+////        self.categoryNames = aDecoder.decode
+//    }
+    required init?(coder aDecoder: NSCoder) {
+        self.categoryNames = aDecoder.decodeObject(forKey: "categoryNames") as! [String]
+        self.itemsPerCategory = aDecoder.decodeObject(forKey: "itemsPerCategory") as! [[GroceryListItem]]
+    }
+
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(categoryNames, forKey: "categoryNames")
+        aCoder.encode(itemsPerCategory, forKey: "itemsPerCategory")
     }
 
     func add(item: GroceryListItem, to: Int) -> Void {

@@ -14,7 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var newItemField: UITextField!
     @IBOutlet var tableView: UITableView!
 
-    var groceryItems: GroceryItems!
+    var groceryItems: GroceryItems?
 
     @IBAction func addPressed(_ sender: UIButton) {
         if let text = newItemField.text {
@@ -23,9 +23,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
             // get index where to append
             let section = 0
-            let index = self.groceryItems.countFor(index: section)
+            let index = self.groceryItems!.countFor(index: section)
             // Add to data source
-            self.groceryItems.add(item: GroceryListItem(text: text), to: section)
+            self.groceryItems!.add(item: GroceryListItem(text: text), to: section)
 
             // insert into table
             let indexPathForRow = IndexPath(row: index, section: section)
@@ -37,9 +37,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        if groceryItems.count > 0 {
-//            return
-//        }
+        if self.groceryItems != nil {
+            return
+        }
 
         self.groceryItems = GroceryItems()
         self.tableView.isEditing = true
@@ -53,7 +53,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
 
-        let item = groceryItems.getItem(list: indexPath.section, index: indexPath.row)
+        let item = groceryItems!.getItem(list: indexPath.section, index: indexPath.row)
         cell.textLabel?.text = item.text
         cell.selectionStyle = .none
         cell.delegate = self
@@ -63,16 +63,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return groceryItems.listCount
+        return groceryItems!.listCount
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return groceryItems.categoryNames[section];
+        return groceryItems!.categoryNames[section];
     }
 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groceryItems.countFor(index: section)
+        return groceryItems!.countFor(index: section)
     }
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
@@ -84,14 +84,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let object = self.groceryItems.remove(itemIndex: sourceIndexPath.row, from: sourceIndexPath.section)
-        self.groceryItems.insert(item: object!, list: destinationIndexPath.section, to: destinationIndexPath.row)
+        let object = self.groceryItems!.remove(itemIndex: sourceIndexPath.row, from: sourceIndexPath.section)
+        self.groceryItems!.insert(item: object!, list: destinationIndexPath.section, to: destinationIndexPath.row)
     }
 
     // MARK: TableViewCellDelegate methosd
 
     func groceryListItemDeleted(groceryListItem: GroceryListItem) {
-        if let position = groceryItems.remove(item: groceryListItem) {
+        if let position = groceryItems!.remove(item: groceryListItem) {
             let indexPathForRow = IndexPath(row: position.index, section: position.section)
             self.tableView.beginUpdates()
             self.tableView.deleteRows(at: [indexPathForRow], with: UITableViewRowAnimation.fade)
@@ -101,42 +101,58 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     // MARK: state (re)storing
 
-//    override func encodeRestorableState(with coder: NSCoder) {
-//        print("viewCtrl, encode state")
-//        coder.encode(newItemField.text, forKey: "newItem")
-//        saveModel()
-//        super.encodeRestorableState(with: coder)
-//    }
-//
-//    override func decodeRestorableState(with coder: NSCoder) {
-//        print("viewCtrl, decode state")
-//        newItemField.text = coder.decodeObject(forKey: "newItem") as? String
-//        self.groceryItems = loadModel() ?? GroceryItems()
-//        super.decodeRestorableState(with: coder)
-//    }
-//
-//    func saveModel() {
-//        print("archiving")
-//        let defaultProps = UserDefaults.standard
-//        let data = NSKeyedArchiver.archivedData(withRootObject: groceryItems)
-//        defaultProps.set(data, forKey: prefKey)
-//        defaultProps.synchronize()
-//    }
-//
-//    func loadModel() -> GroceryItems? {
-//        print("restoring")
-//        let defaultProps = UserDefaults.standard
-//
-////        if let data: AnyObject? = defaultProps.object(forKey: prefKey) {
-////            let model = [GroceryListItem] =
-////        }
-////        let data: NSData = defaultProps.object(forKey: prefKey) as! NSData
-//        if let data: NSData = defaultProps.object(forKey: prefKey) as? NSData {
-//
-//            let model: GroceryItems = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! GroceryItems
-//
-//            return model
+    override func encodeRestorableState(with coder: NSCoder) {
+        print("viewCtrl, encode state")
+        coder.encode(newItemField.text, forKey: "newItem")
+        saveModel()
+        super.encodeRestorableState(with: coder)
+    }
+
+    override func decodeRestorableState(with coder: NSCoder) {
+        print("viewCtrl, decode state")
+        newItemField.text = coder.decodeObject(forKey: "newItem") as? String
+        self.groceryItems = loadModel() ?? GroceryItems()
+        super.decodeRestorableState(with: coder)
+    }
+
+    func saveModel() {
+        print("archiving")
+        let defaultProps = UserDefaults.standard
+        let data = NSKeyedArchiver.archivedData(withRootObject: groceryItems!)
+        defaultProps.set(data, forKey: prefKey)
+        defaultProps.synchronize()
+    }
+
+    func loadModel() -> GroceryItems? {
+        print("restoring")
+//        if self.groceryItems != nil {
+//            print("returning current items")
+//            return self.groceryItems
 //        }
-//        return nil
-//    }
+        let defaultProps = UserDefaults.standard
+
+//        if let data: AnyObject? = defaultProps.object(forKey: prefKey) {
+//            let model = [GroceryListItem] =
+//        }
+//        let data: NSData = defaultProps.object(forKey: prefKey) as! NSData
+        if let data: NSData = defaultProps.object(forKey: prefKey) as? NSData {
+
+//            let model: GroceryItems = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! GroceryItems
+            var model: GroceryItems?
+            do {
+                try model = NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? GroceryItems
+            } catch {
+                print("error in trying to unarchive")
+                return nil
+            }
+            print("returning model")
+            return model ?? nil
+//            if let model: GroceryItems = NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? GroceryItems {
+//
+//            }
+//            return model
+        }
+        print("no data")
+        return nil
+    }
 }

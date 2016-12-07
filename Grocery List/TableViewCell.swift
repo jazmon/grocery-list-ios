@@ -36,8 +36,13 @@ class TableViewCell: UITableViewCell {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        self.groceryListItem = aDecoder.decodeObject(forKey: "groceryListItem") as? GroceryListItem
         super.init(coder: aDecoder)
         //fatalError("init(coder:) has not been implemented")
+    }
+
+    override func decodeRestorableState(with coder: NSCoder) {
+        coder.encode(self.groceryListItem, forKey: "groceryListItem")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
