@@ -10,11 +10,53 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewCellDelegate {
 
-    let prefKey = "groceryListItems"
     @IBOutlet var newItemField: UITextField!
     @IBOutlet var tableView: UITableView!
 
-    var groceryItems: GroceryItems?
+//    struct Category {
+//        var items: [Grocery]
+//        var name: String
+//    }
+//    var groceryItems: GroceryItems?
+//    var categories = [String]()
+//    var groceries = [Grocery]()
+    var categories = [GroceryCategory]()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+//        if let savedGroceries = loadGroceries() {
+//            groceries += savedGroceries;
+//        } else {
+//            groceries += loadSampleGroceries();
+//        }
+        if let savedCategories = loadCategories() {
+            print("found saved categories")
+            categories += savedCategories
+        } else {
+            print("no ssaved vategories foudn")
+            categories += loadSampleCategories()
+        }
+
+        self.tableView.isEditing = true
+    }
+
+    func loadSampleCategories() -> [GroceryCategory] {
+        print("load sample categoreis")
+        var categories = [GroceryCategory]()
+
+        let uncategorized: GroceryCategory = GroceryCategory(name: "Uncategorized")!
+        let lettuce: Grocery = Grocery(name: "Lettuce", price: 0, amount: 1)!
+        uncategorized.items.append(lettuce)
+        categories.append(uncategorized)
+
+        let meats: GroceryCategory = GroceryCategory(name: "Meats")!
+        let bacon: Grocery = Grocery(name: "Bacon", price: 0, amount: 1)!
+        meats.items.append(bacon)
+
+        categories.append(meats)
+        return categories
+    }
 
     @IBAction func addPressed(_ sender: UIButton) {
         if let text = newItemField.text {
@@ -23,29 +65,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
             // get index where to append
             let section = 0
-            let index = self.groceryItems!.countFor(index: section)
+            let index = self.categories[section].items.count
             // Add to data source
-            self.groceryItems!.add(item: GroceryListItem(text: text), to: section)
+            if let item = Grocery(name: text, price: 0, amount: 1) {
+                self.categories[section].items.append(item)
 
-            // insert into table
-            let indexPathForRow = IndexPath(row: index, section: section)
-            self.tableView.beginUpdates()
-            self.tableView.insertRows(at: [indexPathForRow], with: .bottom)
-            self.tableView.endUpdates()
+                // insert into table
+                let indexPathForRow = IndexPath(row: index, section: section)
+                self.tableView.beginUpdates()
+                self.tableView.insertRows(at: [indexPathForRow], with: .bottom)
+                self.tableView.endUpdates()
+            }
+
         }
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        if self.groceryItems != nil {
-            return
-        }
-
-        self.groceryItems = GroceryItems()
-        self.tableView.isEditing = true
-
-        // groceryItems.add(item: GroceryListItem(text: "bacon"), to: "undefined")
-        // groceryItems.add(item: GroceryListItem(text: "eggs"), to: "undefined")
     }
 
     // MARK: - Tableview datasource
@@ -53,26 +85,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
 
-        let item = groceryItems!.getItem(list: indexPath.section, index: indexPath.row)
-        cell.textLabel?.text = item.text
+        let item = categories[indexPath.section].items[indexPath.row]
+        cell.textLabel?.text = item.name
         cell.selectionStyle = .none
         cell.delegate = self
-        cell.groceryListItem = item
+        cell.grocery = item
+        cell.category = indexPath.section
+        cell.row = indexPath.row
 
         return cell
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return groceryItems!.listCount
+        return categories.count
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return groceryItems!.categoryNames[section];
+        return categories[section].name
     }
 
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groceryItems!.countFor(index: section)
+        return categories[section].items.count
     }
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
@@ -84,75 +118,57 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let object = self.groceryItems!.remove(itemIndex: sourceIndexPath.row, from: sourceIndexPath.section)
-        self.groceryItems!.insert(item: object!, list: destinationIndexPath.section, to: destinationIndexPath.row)
+        let item = self.categories[sourceIndexPath.section].items.remove(at: sourceIndexPath.row)
+        categories[destinationIndexPath.section].items.insert(item, at: destinationIndexPath.row)
     }
 
-    // MARK: TableViewCellDelegate methosd
+    // MARK: TableViewCellDelegate methods
 
-    func groceryListItemDeleted(groceryListItem: GroceryListItem) {
-        if let position = groceryItems!.remove(item: groceryListItem) {
-            let indexPathForRow = IndexPath(row: position.index, section: position.section)
-            self.tableView.beginUpdates()
-            self.tableView.deleteRows(at: [indexPathForRow], with: UITableViewRowAnimation.fade)
-            self.tableView.endUpdates()
+    func groceryDeleted(grocery: Grocery, section: Int, row: Int) {
+//        if let position
+//        if let item = self.categories.
+        print("grocery deleted")
+
+        categories[section].items.remove(at: row)
+
+        let indexPathForRow = IndexPath(row: row, section: section)
+        self.tableView.beginUpdates()
+        self.tableView.deleteRows(at: [indexPathForRow], with: UITableViewRowAnimation.fade)
+        self.tableView.endUpdates()
+    }
+
+    // MARK: NSCoding
+
+    func saveCategories() {
+        let isSaveSuccessful = NSKeyedArchiver.archiveRootObject(categories, toFile: GroceryCategory.archiveURL.path)
+
+        if !isSaveSuccessful {
+            print("Failed to save groceries...")
         }
     }
+
+    func loadCategories() -> [GroceryCategory]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: GroceryCategory.archiveURL.path) as? [GroceryCategory]
+    }
+
 
     // MARK: state (re)storing
 
     override func encodeRestorableState(with coder: NSCoder) {
         print("viewCtrl, encode state")
         coder.encode(newItemField.text, forKey: "newItem")
-        saveModel()
+        saveCategories()
         super.encodeRestorableState(with: coder)
     }
 
     override func decodeRestorableState(with coder: NSCoder) {
         print("viewCtrl, decode state")
         newItemField.text = coder.decodeObject(forKey: "newItem") as? String
-        self.groceryItems = loadModel() ?? GroceryItems()
+//        self.groceryItems = loadModel() ?? GroceryItems()
+//        if let categories = loadCategories() {
+//            print("found categories")
+//            self.categories = categories
+//        }
         super.decodeRestorableState(with: coder)
-    }
-
-    func saveModel() {
-        print("archiving")
-        let defaultProps = UserDefaults.standard
-        let data = NSKeyedArchiver.archivedData(withRootObject: groceryItems!)
-        defaultProps.set(data, forKey: prefKey)
-        defaultProps.synchronize()
-    }
-
-    func loadModel() -> GroceryItems? {
-        print("restoring")
-//        if self.groceryItems != nil {
-//            print("returning current items")
-//            return self.groceryItems
-//        }
-        let defaultProps = UserDefaults.standard
-
-//        if let data: AnyObject? = defaultProps.object(forKey: prefKey) {
-//            let model = [GroceryListItem] =
-//        }
-//        let data: NSData = defaultProps.object(forKey: prefKey) as! NSData
-        if let data: NSData = defaultProps.object(forKey: prefKey) as? NSData {
-
-//            let model: GroceryItems = try! NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as! GroceryItems
-            var model: GroceryItems?
-            do {
-                try model = NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? GroceryItems
-            } catch {
-                print("error in trying to unarchive")
-                return nil
-            }
-            print("returning model")
-            return model ?? nil
-//            if let model: GroceryItems = NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? GroceryItems {
-//
-//            }
-//            return model
-        }
-        print("no data")
-        return nil
     }
 }

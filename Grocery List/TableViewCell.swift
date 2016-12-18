@@ -12,7 +12,7 @@ import Foundation
 // A protocol that the TableViewCell uses to inform its delegate of state change
 protocol TableViewCellDelegate {
     // indicates that the given item has been deleted
-    func groceryListItemDeleted(groceryListItem: GroceryListItem)
+    func groceryDeleted(grocery: Grocery, section: Int, row: Int)
 }
 
 class TableViewCell: UITableViewCell {
@@ -20,8 +20,10 @@ class TableViewCell: UITableViewCell {
     var originalCenter: CGPoint = CGPoint()
     var deleteOnDragRelease: Bool = false
     var delegate: TableViewCellDelegate?
-    var groceryListItem: GroceryListItem?
-
+    var grocery: Grocery?
+    var row: Int?
+    var category: Int?
+//    var groceryListItem: GroceryListItem?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,24 +33,24 @@ class TableViewCell: UITableViewCell {
         addGestureRecognizer(recognizer)
     }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        self.groceryListItem = aDecoder.decodeObject(forKey: "groceryListItem") as? GroceryListItem
-        super.init(coder: aDecoder)
-        //fatalError("init(coder:) has not been implemented")
-    }
+//    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+//        super.init(style: style, reuseIdentifier: reuseIdentifier)
+//    }
+//    
+//    required init?(coder aDecoder: NSCoder) {
+//        self.groceryListItem = aDecoder.decodeObject(forKey: "groceryListItem") as? GroceryListItem
+//        super.init(coder: aDecoder)
+//        //fatalError("init(coder:) has not been implemented")
+//    }
+//
+//    override func decodeRestorableState(with coder: NSCoder) {
+//        coder.encode(self.groceryListItem, forKey: "groceryListItem")
+//    }
 
-    override func decodeRestorableState(with coder: NSCoder) {
-        coder.encode(self.groceryListItem, forKey: "groceryListItem")
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
-    }
+//    override func setSelected(_ selected: Bool, animated: Bool) {
+//        super.setSelected(selected, animated: animated)
+//        // Configure the view for the selected state
+//    }
 
     // MARK - gesture handler methods
 
@@ -72,8 +74,8 @@ class TableViewCell: UITableViewCell {
             if !deleteOnDragRelease {
                 // if the item is not being deleted, snap back to the original location
                 UIView.animate(withDuration: 0.2, animations: {self.frame = originalFrame})
-            } else if delegate != nil && groceryListItem != nil {
-                delegate!.groceryListItemDeleted(groceryListItem: groceryListItem!)
+            } else if delegate != nil && grocery != nil {
+                delegate!.groceryDeleted(grocery: grocery!, section: category!, row: row!)
             }
             break
         default:
