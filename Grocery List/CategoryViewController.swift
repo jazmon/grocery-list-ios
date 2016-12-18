@@ -25,7 +25,7 @@ class CategoryViewController: UIViewController {
 
 
         // go back to the previous view controller
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController!.popViewController(animated: true)
     }
     
 }
