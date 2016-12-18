@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewCellDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TableViewCellDelegate, DataEnteredDelegate {
 
+    // MARK: Properties
     @IBOutlet var newItemField: UITextField!
     @IBOutlet var tableView: UITableView!
 
@@ -24,7 +25,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             categories += loadSampleCategories()
         }
 
-        self.tableView.isEditing = true
+//        self.navigationItem.rightBarButtonItem = editButtonItem
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Categories", style: .plain, target: self, action: #selector(self.gotoAddCategory))
+        self.tableView.setEditing(true, animated: false)
+
+    }
+
+//    override func setEditing(_ editing: Bool, animated: Bool) {
+//        super.setEditing(editing, animated: animated)
+//        self.tableView.setEditing(editing, animated: animated)
+//    }
+
+    func gotoAddCategory() {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Category") as! CategoryViewController
+        vc.delegate = self
+        self.navigationController!.pushViewController(vc, animated: true)
+    }
+
+    func addCategory(category: GroceryCategory) {
+        print("add category")
+        self.categories.append(category)
+        self.saveCategories()
+        self.tableView.reloadData()
     }
 
     func loadSampleCategories() -> [GroceryCategory] {
@@ -64,6 +86,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
 
+    // MARK: segue
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("prepare, segue identifier: \(segue.identifier)")
+        if segue.identifier == "Category" {
+            let vc = segue.destination as! CategoryViewController
+            vc.delegate = self
+        }
+    }
+
     // MARK: Tableview datasource
 
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -94,6 +126,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         return .none
+    }
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
 
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
@@ -129,8 +165,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func loadCategories() -> [GroceryCategory]? {
         return NSKeyedUnarchiver.unarchiveObject(withFile: GroceryCategory.archiveURL.path) as? [GroceryCategory]
     }
-
-    // MARK: state (re)storing
 
     override func encodeRestorableState(with coder: NSCoder) {
         coder.encode(newItemField.text, forKey: "newItem")

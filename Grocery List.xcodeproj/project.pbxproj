@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C1CE4EA1E0577BC00AA6CB6 /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1CE4E91E0577BC00AA6CB6 /* Grocery.swift */; };
+		2C34FA3B1E069D0E000F1BC5 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34FA3A1E069D0E000F1BC5 /* CategoryViewController.swift */; };
 		2C46B50D1DE0842200EF8EBC /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C46B50C1DE0842200EF8EBC /* TableViewCell.swift */; };
 		2C5D80C91DDD099D00715786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D80C81DDD099D00715786 /* AppDelegate.swift */; };
 		2C5D80CB1DDD099D00715786 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5D80CA1DDD099D00715786 /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		2C1CE4E91E0577BC00AA6CB6 /* Grocery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grocery.swift; sourceTree = "<group>"; };
+		2C34FA3A1E069D0E000F1BC5 /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		2C46B50C1DE0842200EF8EBC /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		2C5D80C51DDD099D00715786 /* Grocery List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grocery List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C5D80C81DDD099D00715786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -89,6 +91,15 @@
 			name = models;
 			sourceTree = "<group>";
 		};
+		2C34FA3C1E06AD51000F1BC5 /* viewcontrollers */ = {
+			isa = PBXGroup;
+			children = (
+				2C34FA3A1E069D0E000F1BC5 /* CategoryViewController.swift */,
+				2C5D80CA1DDD099D00715786 /* ViewController.swift */,
+			);
+			name = viewcontrollers;
+			sourceTree = "<group>";
+		};
 		2C5D80BC1DDD099D00715786 = {
 			isa = PBXGroup;
 			children = (
@@ -112,9 +123,9 @@
 		2C5D80C71DDD099D00715786 /* Grocery List */ = {
 			isa = PBXGroup;
 			children = (
+				2C34FA3C1E06AD51000F1BC5 /* viewcontrollers */,
 				2C1C24671DE06FEB00C61305 /* models */,
 				2C5D80C81DDD099D00715786 /* AppDelegate.swift */,
-				2C5D80CA1DDD099D00715786 /* ViewController.swift */,
 				2CE70FF01DE1BD9D000DBAFB /* storyboards */,
 				2C5D80CF1DDD099D00715786 /* Assets.xcassets */,
 				2C5D80D41DDD099D00715786 /* Info.plist */,
@@ -299,6 +310,7 @@
 				2C46B50D1DE0842200EF8EBC /* TableViewCell.swift in Sources */,
 				2C5D80C91DDD099D00715786 /* AppDelegate.swift in Sources */,
 				2C1CE4EA1E0577BC00AA6CB6 /* Grocery.swift in Sources */,
+				2C34FA3B1E069D0E000F1BC5 /* CategoryViewController.swift in Sources */,
 				2C6641131E05B8240047C06F /* GroceryCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
