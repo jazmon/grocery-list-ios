@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  Grocery List
+
+  Created by Atte Huhtakangas on 18/12/2016.
+  Copyright © 2016 Atte Huhtakangas. All rights reserved.
+*/
+
+CATEGORY="Kategoria";
+UNCATEGORIZED="Kategorioimattomat";
+LETTUCE="Salaatti";
+BACON="Pekoni";
+PRODUCE="Vihannekset";
+MEATS="Lihatuotteet";

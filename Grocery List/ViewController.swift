@@ -26,7 +26,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
 
         // self.navigationItem.leftBarButtonItem = editButtonItem
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Categories", style: .plain, target: self, action: #selector(self.gotoAddCategory))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("CATEGORY", comment: "Category"), style: .plain, target: self, action: #selector(self.gotoAddCategory))
         self.tableView.setEditing(true, animated: false)
 
     }
@@ -43,7 +43,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func addCategory(category: GroceryCategory) {
-        print("add category")
         self.categories.append(category)
         self.saveCategories()
         self.tableView.reloadData()
@@ -52,13 +51,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func loadSampleCategories() -> [GroceryCategory] {
         var categories = [GroceryCategory]()
 
-        let uncategorized: GroceryCategory = GroceryCategory(name: "Uncategorized")!
-        let lettuce: Grocery = Grocery(name: "Lettuce", price: 0, amount: 1)!
+        let uncategorized: GroceryCategory = GroceryCategory(name: NSLocalizedString("UNCATEGORIZED", comment: "Uncategorized"))!
+        let lettuce: Grocery = Grocery(name: NSLocalizedString("LETTUCE", comment: "Lettuce"), price: 0, amount: 1)!
         uncategorized.items.append(lettuce)
         categories.append(uncategorized)
 
-        let meats: GroceryCategory = GroceryCategory(name: "Meats")!
-        let bacon: Grocery = Grocery(name: "Bacon", price: 0, amount: 1)!
+        let meats: GroceryCategory = GroceryCategory(name: NSLocalizedString("MEATS", comment: "Meats"))!
+        let bacon: Grocery = Grocery(name: NSLocalizedString("BACON", comment: "Bacon"), price: 0, amount: 1)!
         meats.items.append(bacon)
 
         categories.append(meats)
@@ -89,7 +88,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: segue
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("prepare, segue identifier: \(segue.identifier)")
         if segue.identifier == "Category" {
             let vc = segue.destination as! CategoryViewController
             vc.delegate = self
