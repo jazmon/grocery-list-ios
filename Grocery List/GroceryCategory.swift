@@ -9,6 +9,7 @@
 import Foundation
 
 class GroceryCategory: NSObject, NSCoding {
+
     // MARK: Properties
     var items: [Grocery]
     var name: String
@@ -17,7 +18,6 @@ class GroceryCategory: NSObject, NSCoding {
 
     static let documentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let archiveURL = documentsDirectory.appendingPathComponent("categories")
-
 
     // MARK: Types
 
@@ -52,9 +52,7 @@ class GroceryCategory: NSObject, NSCoding {
 
     func encode(with aCoder: NSCoder) {
         aCoder.encode(name, forKey: PropertyKey.nameKey)
-//        aCoder.encodeConditionalObject(items, forKey: PropertyKey.itemsKey)
         aCoder.encode(items, forKey: PropertyKey.itemsKey)
-//        aCoder.encode(<#T##objv: Any?##Any?#>, forKey: <#T##String#>)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
@@ -62,11 +60,5 @@ class GroceryCategory: NSObject, NSCoding {
         let items: [Grocery] = aDecoder.decodeObject(forKey: PropertyKey.itemsKey) as! [Grocery]
 
         self.init(name: name, items: items)
-//        let name: String = aDecoder.decodeObject(forKey: PropertyKey.nameKey) as! String
-//        let price: Int = aDecoder.decodeInteger(forKey: PropertyKey.priceKey)
-//        let amount: Int = aDecoder.decodeInteger(forKey: PropertyKey.amountKey)
-//
-//        self.init(name: name, price: price, amount: amount)
     }
-    
 }

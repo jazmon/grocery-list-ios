@@ -23,7 +23,6 @@ class TableViewCell: UITableViewCell {
     var grocery: Grocery?
     var row: Int?
     var category: Int?
-//    var groceryListItem: GroceryListItem?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,25 +31,6 @@ class TableViewCell: UITableViewCell {
         recognizer.delegate = self
         addGestureRecognizer(recognizer)
     }
-
-//    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-//        super.init(style: style, reuseIdentifier: reuseIdentifier)
-//    }
-//    
-//    required init?(coder aDecoder: NSCoder) {
-//        self.groceryListItem = aDecoder.decodeObject(forKey: "groceryListItem") as? GroceryListItem
-//        super.init(coder: aDecoder)
-//        //fatalError("init(coder:) has not been implemented")
-//    }
-//
-//    override func decodeRestorableState(with coder: NSCoder) {
-//        coder.encode(self.groceryListItem, forKey: "groceryListItem")
-//    }
-
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//        // Configure the view for the selected state
-//    }
 
     // MARK - gesture handler methods
 
@@ -77,6 +57,7 @@ class TableViewCell: UITableViewCell {
             } else if delegate != nil && grocery != nil {
                 delegate!.groceryDeleted(grocery: grocery!, section: category!, row: row!)
             }
+
             break
         default:
             break
@@ -86,12 +67,14 @@ class TableViewCell: UITableViewCell {
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
             let translation = panGestureRecognizer.translation(in: superview!)
+
             if fabs(translation.x) > fabs(translation.y) {
                 return true
             }
+
             return false
         }
+
         return false
     }
-
 }

@@ -13,28 +13,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet var newItemField: UITextField!
     @IBOutlet var tableView: UITableView!
 
-//    struct Category {
-//        var items: [Grocery]
-//        var name: String
-//    }
-//    var groceryItems: GroceryItems?
-//    var categories = [String]()
-//    var groceries = [Grocery]()
     var categories = [GroceryCategory]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        if let savedGroceries = loadGroceries() {
-//            groceries += savedGroceries;
-//        } else {
-//            groceries += loadSampleGroceries();
-//        }
         if let savedCategories = loadCategories() {
-            print("found saved categories")
             categories += savedCategories
         } else {
-            print("no ssaved vategories foudn")
             categories += loadSampleCategories()
         }
 
@@ -42,7 +28,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func loadSampleCategories() -> [GroceryCategory] {
-        print("load sample categoreis")
         var categories = [GroceryCategory]()
 
         let uncategorized: GroceryCategory = GroceryCategory(name: "Uncategorized")!
@@ -76,11 +61,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.tableView.insertRows(at: [indexPathForRow], with: .bottom)
                 self.tableView.endUpdates()
             }
-
         }
     }
 
-    // MARK: - Tableview datasource
+    // MARK: Tableview datasource
 
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
@@ -104,7 +88,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return categories[section].name
     }
 
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return categories[section].items.count
     }
@@ -125,10 +108,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: TableViewCellDelegate methods
 
     func groceryDeleted(grocery: Grocery, section: Int, row: Int) {
-//        if let position
-//        if let item = self.categories.
-        print("grocery deleted")
-
         categories[section].items.remove(at: row)
 
         let indexPathForRow = IndexPath(row: row, section: section)
@@ -151,24 +130,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return NSKeyedUnarchiver.unarchiveObject(withFile: GroceryCategory.archiveURL.path) as? [GroceryCategory]
     }
 
-
     // MARK: state (re)storing
 
     override func encodeRestorableState(with coder: NSCoder) {
-        print("viewCtrl, encode state")
         coder.encode(newItemField.text, forKey: "newItem")
         saveCategories()
         super.encodeRestorableState(with: coder)
     }
 
     override func decodeRestorableState(with coder: NSCoder) {
-        print("viewCtrl, decode state")
         newItemField.text = coder.decodeObject(forKey: "newItem") as? String
-//        self.groceryItems = loadModel() ?? GroceryItems()
-//        if let categories = loadCategories() {
-//            print("found categories")
-//            self.categories = categories
-//        }
         super.decodeRestorableState(with: coder)
     }
 }

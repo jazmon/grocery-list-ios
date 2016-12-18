@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 class Grocery: NSObject, NSCoding {
     // MARK: Properties
@@ -38,7 +37,6 @@ class Grocery: NSObject, NSCoding {
         super.init()
 
         if name.isEmpty {
-            print("name was empty!")
             return nil
         }
     }
@@ -46,14 +44,12 @@ class Grocery: NSObject, NSCoding {
     // MARK: NSCoding
 
     func encode(with aCoder: NSCoder) {
-        print("uliluli")
         aCoder.encode(name, forKey: PropertyKey.nameKey)
         aCoder.encode(price, forKey: PropertyKey.priceKey)
         aCoder.encode(amount, forKey: PropertyKey.amountKey)
     }
 
     required convenience init?(coder aDecoder: NSCoder) {
-        print("ugabuga")
         let name: String = aDecoder.decodeObject(forKey: PropertyKey.nameKey) as! String
         let price: Int = aDecoder.decodeInteger(forKey: PropertyKey.priceKey)
         let amount: Int = aDecoder.decodeInteger(forKey: PropertyKey.amountKey)
