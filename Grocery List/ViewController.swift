@@ -25,16 +25,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             categories += loadSampleCategories()
         }
 
-//        self.navigationItem.rightBarButtonItem = editButtonItem
+        // self.navigationItem.leftBarButtonItem = editButtonItem
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Categories", style: .plain, target: self, action: #selector(self.gotoAddCategory))
         self.tableView.setEditing(true, animated: false)
 
     }
 
-//    override func setEditing(_ editing: Bool, animated: Bool) {
-//        super.setEditing(editing, animated: animated)
-//        self.tableView.setEditing(editing, animated: animated)
-//    }
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        self.tableView.setEditing(editing, animated: animated)
+    }
 
     func gotoAddCategory() {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Category") as! CategoryViewController

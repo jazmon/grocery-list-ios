@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11761" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="uCc-Qh-aSH">
-    <device id="retina3_5" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,23 +19,23 @@
                         <viewControllerLayoutGuide type="bottom" id="3mv-i1-Hb2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Q9p-Ee-GUO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="L7J-4g-5mH">
-                                <rect key="frame" x="0.0" y="64" width="320" height="408"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="664"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBj-1t-FEb">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="42"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="42"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="243" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="bananas" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="MKY-eD-3o2">
-                                                <rect key="frame" x="8" y="0.0" width="236" height="42"/>
+                                                <rect key="frame" x="8" y="0.0" width="330" height="42"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="68A-kC-Jcq">
-                                                <rect key="frame" x="244" y="0.0" width="76" height="42"/>
+                                                <rect key="frame" x="338" y="0.0" width="76" height="42"/>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                                 <inset key="contentEdgeInsets" minX="24" minY="0.0" maxX="24" maxY="0.0"/>
                                                 <state key="normal" title="Add"/>
@@ -50,14 +50,14 @@
                                         <edgeInsets key="layoutMargins" top="0.0" left="8" bottom="0.0" right="0.0"/>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleAspectFit" directionalLockEnabled="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="onDrag" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ZrG-Tu-2XF">
-                                        <rect key="frame" x="0.0" y="42" width="320" height="366"/>
+                                        <rect key="frame" x="0.0" y="42" width="414" height="622"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="FQt-UN-atF" customClass="TableViewCell" customModule="Grocery_List" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="56" width="320" height="44"/>
+                                                <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FQt-UN-atF" id="442-Uo-wQc">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -118,24 +118,24 @@
                         <viewControllerLayoutGuide type="bottom" id="fal-MW-QRD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OZa-Mg-b9N">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NtC-Z2-b4A">
-                                <rect key="frame" x="69" y="72" width="231" height="30"/>
+                                <rect key="frame" x="73" y="72" width="321" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kik-6d-oLy">
-                                <rect key="frame" x="145" y="117" width="30" height="30"/>
+                                <rect key="frame" x="149" y="117" width="116" height="30"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
                                     <action selector="addPressed:" destination="kdU-Fv-Jgb" eventType="touchUpInside" id="fT6-uO-Vom"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heY-pR-32L">
-                                <rect key="frame" x="16" y="77" width="45" height="21"/>
+                                <rect key="frame" x="20" y="77" width="45" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

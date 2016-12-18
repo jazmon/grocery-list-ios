@@ -1,0 +1,21 @@
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "68A-kC-Jcq"; */
+"68A-kC-Jcq.normalTitle" = "Lisää";
+
+/* Class = "UINavigationItem"; title = "Grocery List"; ObjectID = "6Nm-uK-O1q"; */
+"6Nm-uK-O1q.title" = "Ruokaostokset";
+
+/* Class = "UIButton"; normalTitle = "Add"; ObjectID = "Kik-6d-oLy"; */
+"Kik-6d-oLy.normalTitle" = "Lisää";
+
+/* Class = "UITextField"; placeholder = "bananas"; ObjectID = "MKY-eD-3o2"; */
+"MKY-eD-3o2.placeholder" = "banaaneja";
+
+/* Class = "UIViewController"; title = "Grocery List"; ObjectID = "cV9-lH-Vkc"; */
+"cV9-lH-Vkc.title" = "Ruokaostokset";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "heY-pR-32L"; */
+"heY-pR-32L.text" = "Nimi";
+
+/* Class = "UIViewController"; title = "Category"; ObjectID = "kdU-Fv-Jgb"; */
+"kdU-Fv-Jgb.title" = "Kategoria";

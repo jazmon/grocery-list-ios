@@ -39,6 +39,8 @@
 
 /* Begin PBXFileReference section */
 		2C1CE4E91E0577BC00AA6CB6 /* Grocery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grocery.swift; sourceTree = "<group>"; };
+		2C1D7D101E06D3A500EBEC7B /* fi-FI */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fi-FI"; path = "fi-FI.lproj/Main.strings"; sourceTree = "<group>"; };
+		2C1D7D111E06D3A500EBEC7B /* fi-FI */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "fi-FI"; path = "fi-FI.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		2C34FA3A1E069D0E000F1BC5 /* CategoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		2C46B50C1DE0842200EF8EBC /* TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		2C5D80C51DDD099D00715786 /* Grocery List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grocery List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -351,6 +353,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C5D80CD1DDD099D00715786 /* Base */,
+				2C1D7D101E06D3A500EBEC7B /* fi-FI */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C5D80D21DDD099D00715786 /* Base */,
+				2C1D7D111E06D3A500EBEC7B /* fi-FI */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -370,6 +374,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -420,6 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -469,6 +475,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.atte.Grocery-List";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -482,6 +489,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.atte.Grocery-List";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
